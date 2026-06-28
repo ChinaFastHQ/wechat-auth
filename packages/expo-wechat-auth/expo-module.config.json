@@ -1,0 +1,10 @@
+{
+  "platforms": ["apple", "android"],
+  "apple": {
+    "modules": ["ExpoWeChatAuthModule"],
+    "appDelegateSubscribers": ["WeChatAuthAppDelegateSubscriber"]
+  },
+  "android": {
+    "modules": ["expo.modules.wechatauth.ExpoWeChatAuthModule"]
+  }
+}

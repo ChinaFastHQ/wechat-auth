@@ -1,0 +1,22 @@
+{
+  "name": "expo-wechat-auth-monorepo",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "pnpm -r build",
+    "format": "oxlint . --fix -A all -D curly && oxfmt .",
+    "format:check": "oxlint . -A all -D curly && oxfmt --check .",
+    "lint": "oxlint . --deny-warnings",
+    "lint:fix": "oxlint . --fix --deny-warnings",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "oxfmt": "^0.56.0",
+    "oxlint": "^1.71.0",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  },
+  "packageManager": "pnpm@9.6.0"
+}

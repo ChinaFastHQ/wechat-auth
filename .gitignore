@@ -1,0 +1,12 @@
+node_modules
+dist
+.expo
+.next
+*.tsbuildinfo
+# Local environment files (templates such as .env.example remain tracked)
+.env
+.DS_Store
+coverage
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal

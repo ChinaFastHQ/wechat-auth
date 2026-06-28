@@ -1,0 +1,46 @@
+:root {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  color: #17212b;
+  background: #eaf2f8;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+main {
+  width: min(720px, calc(100% - 32px));
+  margin: 8vh auto;
+  padding: 40px;
+  border-radius: 14px;
+  background: white;
+  box-shadow: 0 18px 60px #1c4d6f24;
+}
+h1 {
+  margin-top: 0;
+  color: #245f8b;
+}
+p {
+  color: #526879;
+  line-height: 1.65;
+}
+button {
+  padding: 13px 20px;
+  border: 0;
+  border-radius: 7px;
+  color: white;
+  background: #287fb8;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.55;
+}
+img {
+  border-radius: 50%;
+}
+.error {
+  color: #ae2d2d;
+}

@@ -1,0 +1,60 @@
+{
+  "name": "@chinafast/expo-wechat-auth-config-plugin",
+  "version": "0.1.0",
+  "description": "Expo config plugin for expo-wechat-auth native setup.",
+  "keywords": [
+    "auth",
+    "config-plugin",
+    "expo",
+    "wechat"
+  ],
+  "homepage": "https://github.com/chinafast/expo-wechat-auth#readme",
+  "bugs": {
+    "url": "https://github.com/chinafast/expo-wechat-auth/issues"
+  },
+  "license": "MIT",
+  "author": "ChinaFast",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chinafast/expo-wechat-auth.git",
+    "directory": "packages/config-plugin"
+  },
+  "files": [
+    "dist",
+    "index.cjs",
+    "index.mjs",
+    "README.md",
+    "LICENSE"
+  ],
+  "type": "commonjs",
+  "sideEffects": false,
+  "main": "./index.cjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./index.mjs",
+      "require": "./index.cjs",
+      "default": "./index.mjs"
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@expo/config-plugins": "^56.0.8"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  },
+  "peerDependencies": {
+    "expo": "*"
+  }
+}

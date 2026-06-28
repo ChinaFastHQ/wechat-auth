@@ -1,0 +1,28 @@
+{
+  "name": "web-wechat-auth-nextjs-example",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n web,server -c cyan,green \"pnpm dev:web\" \"pnpm dev:server\"",
+    "dev:web": "next dev -p 3000",
+    "dev:server": "node --watch server.mjs",
+    "build": "next build",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@chinafast/web-wechat-auth": "workspace:*",
+    "@chinafast/wechat-auth-server": "workspace:*",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "next": "^15.2.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "concurrently": "^9.1.2",
+    "typescript": "^5.5.4"
+  }
+}

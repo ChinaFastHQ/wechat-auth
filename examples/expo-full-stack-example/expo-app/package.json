@@ -1,0 +1,31 @@
+{
+  "name": "expo-wechat-auth-full-stack-expo-example",
+  "private": true,
+  "main": "expo/AppEntry",
+  "scripts": {
+    "start": "expo start",
+    "web": "expo start --web",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@better-auth/expo": "^1.6.20",
+    "@chinafast/expo-wechat-auth": "workspace:*",
+    "better-auth": "^1.6.20",
+    "expo": "^56.0.11",
+    "expo-linking": "^56.0.14",
+    "expo-network": "~56.0.5",
+    "expo-secure-store": "~56.0.4",
+    "expo-status-bar": "^56.0.4",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-native": "^0.86.0",
+    "react-native-web": "^0.21.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "@types/react": "^19.1.1",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  }
+}

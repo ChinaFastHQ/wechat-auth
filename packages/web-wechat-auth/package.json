@@ -1,0 +1,68 @@
+{
+  "name": "@chinafast/web-wechat-auth",
+  "version": "0.1.0",
+  "description": "WeChat authentication for browsers and React, with Better Auth integrations.",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js",
+      "default": "./dist/react.js"
+    },
+    "./better-auth/client": {
+      "types": "./dist/better-auth-client.d.ts",
+      "import": "./dist/better-auth-client.js",
+      "default": "./dist/better-auth-client.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@chinafast/wechat-auth-core": "workspace:^"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.0.1",
+    "@types/react": "^18.3.3",
+    "better-auth": "^1.6.20",
+    "jsdom": "^29.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5",
+    "vue": "^3.5.0"
+  },
+  "peerDependencies": {
+    "better-auth": ">=1.6.0",
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "better-auth": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    }
+  }
+}

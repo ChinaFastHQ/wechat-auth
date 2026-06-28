@@ -1,0 +1,55 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "perf": "warn"
+  },
+  "plugins": ["typescript", "oxc", "unicorn", "import", "react", "vitest"],
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/next-env.d.ts",
+    "**/coverage/**",
+    "**/.expo/**",
+    ".pnpm-store/**"
+  ],
+  "env": {
+    "browser": true,
+    "es2020": true,
+    "node": true
+  },
+  "rules": {
+    "curly": ["error", "all"],
+    "no-console": "off",
+    "no-empty": "error",
+    "no-debugger": "error",
+    "eqeqeq": ["error", "always"],
+    "react/react-in-jsx-scope": "off",
+    "react/style-prop-object": "off",
+    "vitest/no-conditional-expect": "off",
+    "eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
+    "typescript/consistent-type-imports": "error"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.{ts,tsx}", "**/__tests__/**/*.{ts,tsx}", "**/vitest.config.ts"],
+      "env": {
+        "vitest": true
+      }
+    },
+    {
+      "files": ["examples/**"],
+      "rules": {
+        "unicorn/no-null": "off"
+      }
+    }
+  ]
+}

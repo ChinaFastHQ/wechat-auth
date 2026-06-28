@@ -1,0 +1,20 @@
+{
+  "name": "web-wechat-auth-vanilla-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -n web,server -c cyan,green \"pnpm dev:web\" \"pnpm dev:server\"",
+    "dev:web": "vite",
+    "dev:server": "node --watch server.mjs",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@chinafast/web-wechat-auth": "workspace:*",
+    "@chinafast/wechat-auth-server": "workspace:*",
+    "concurrently": "^9.1.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "vite": "^5.4.21"
+  }
+}
