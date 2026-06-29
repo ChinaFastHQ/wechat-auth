@@ -1,0 +1,43 @@
+---
+title: 服务端与安全
+description: 交换 code、验证 state，并与 Better Auth 集成。
+---
+
+# 服务端与安全
+
+`@chinafast/wechat-auth-server` 提供仅服务端可用的凭据选择、授权 code 交换、用户资料查询和一次性 state 验证。
+
+```ts
+import { createMemoryStateStore, exchangeWeChatCode } from "@chinafast/wechat-auth-server";
+```
+
+## Better Auth
+
+```ts
+import { betterAuth } from "better-auth";
+import { createMemoryStateStore } from "@chinafast/wechat-auth-server";
+import { wechatPlugin } from "@chinafast/wechat-auth-server/better-auth";
+
+export const auth = betterAuth({
+  database,
+  plugins: [wechatPlugin({
+    credentials: {
+      openPlatform: {
+        appId: process.env.WECHAT_APP_ID!,
+        secret: process.env.WECHAT_APP_SECRET!,
+      },
+    },
+    stateStore: createMemoryStateStore(),
+  })],
+});
+```
+
+内存 state 存储适合开发和单进程服务。多实例生产环境应使用 Redis 等共享 `WeChatStateStore`，并保证消费操作是原子的。
+
+## 安全检查
+
+- 禁止向浏览器或原生客户端暴露 `AppSecret`。
+- 在服务端生成不可预测且短期有效的一次性 state。
+- 交换 code 前原子消费 state。
+- 使用回调地址白名单，不接受任意客户端地址。
+- 仅在服务端交换成功后建立应用会话。

@@ -1,0 +1,47 @@
+{
+  "slug": "wechat-auth",
+  "title": "WeChat Auth",
+  "description": "Authentication across web, Expo, Node.js, and Better Auth.",
+  "repository": "https://github.com/ChinaFastHQ/wechat-auth",
+  "branch": "master",
+  "locales": {
+    "zh": {
+      "title": "微信登录",
+      "description": "适用于 Web、Expo、Node.js 和 Better Auth 的微信身份验证。",
+      "sidebar": [
+        {
+          "text": "简介",
+          "items": [
+            { "text": "概览", "link": "/" },
+            { "text": "快速开始", "link": "/getting-started" }
+          ]
+        },
+        {
+          "text": "运行环境",
+          "items": [
+            { "text": "Web", "link": "/web" },
+            { "text": "Expo", "link": "/expo" },
+            { "text": "服务端与安全", "link": "/server" }
+          ]
+        }
+      ]
+    }
+  },
+  "sidebar": [
+    {
+      "text": "Introduction",
+      "items": [
+        { "text": "Overview", "link": "/" },
+        { "text": "Getting started", "link": "/getting-started" }
+      ]
+    },
+    {
+      "text": "Runtimes",
+      "items": [
+        { "text": "Web", "link": "/web" },
+        { "text": "Expo", "link": "/expo" },
+        { "text": "Server and security", "link": "/server" }
+      ]
+    }
+  ]
+}

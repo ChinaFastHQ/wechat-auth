@@ -1,0 +1,49 @@
+---
+title: Getting started
+description: Install WeChat Auth and understand the end-to-end authorization flow.
+---
+
+# Getting started
+
+## Install by runtime
+
+::: code-group
+
+```bash [Web]
+pnpm add @chinafast/web-wechat-auth
+```
+
+```bash [Expo]
+pnpm add @chinafast/expo-wechat-auth
+```
+
+```bash [Server]
+pnpm add @chinafast/wechat-auth-server
+```
+
+:::
+
+## The authentication flow
+
+1. Your client requests one-time state from your backend.
+2. The package selects the correct native, web, or Official Account authorization flow.
+3. WeChat returns an authorization code and the original state.
+4. The client checks its local pending state and sends the callback data to your backend.
+5. Your backend atomically consumes its own state, exchanges the code, and creates a session.
+
+Client-side pending state correlates a callback with the browser or app that started it. It does not replace server-side state validation.
+
+## Required WeChat configuration
+
+The credentials depend on the runtimes you ship:
+
+- Open Platform mobile app credentials for native Expo sign-in.
+- Website application credentials for ordinary browser authorization.
+- Official Account credentials for authorization inside WeChat.
+- Registered redirect URIs, Universal Links, URL schemes, and platform identifiers where applicable.
+
+Keep every `AppSecret` in server-only environment variables. Public client configuration should contain app IDs and redirect locations only.
+
+## Next steps
+
+Continue with [Web](/wechat-auth/web) or [Expo](/wechat-auth/expo), then configure the trusted [server](/wechat-auth/server).

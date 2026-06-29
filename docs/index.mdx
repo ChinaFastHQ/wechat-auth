@@ -1,0 +1,33 @@
+---
+title: WeChat Auth
+description: One authentication engine for browsers, Expo, Node.js, and Better Auth.
+head:
+  - - meta
+    - property: og:title
+      content: ChinaFast WeChat Auth
+---
+
+# WeChat Auth
+
+One portable authentication engine with runtime-specific packages for the browser, Expo, and trusted servers.
+
+::: tip Runtime-safe by design
+Client configuration accepts app IDs and redirect URIs. WeChat app secrets belong exclusively in `@chinafast/wechat-auth-server`.
+:::
+
+## Packages
+
+| Package | Responsibility |
+| --- | --- |
+| `@chinafast/wechat-auth-core` | Framework-free policy, URL construction, state validation, and orchestration |
+| `@chinafast/web-wechat-auth` | Vanilla browser client plus React and Better Auth client entry points |
+| `@chinafast/expo-wechat-auth` | Expo/React Native environment, linking, storage, config plugin, and native SDK adapter |
+| `@chinafast/wechat-auth-server` | Credentials, code exchange, profiles, server-side state, and Better Auth server integration |
+
+## Choose a starting point
+
+- Use the [web guide](/wechat-auth/web) for browser applications and SSR frameworks.
+- Use the [Expo guide](/wechat-auth/expo) for native apps and development builds.
+- Build your trusted backend with the [server and security guide](/wechat-auth/server).
+
+All clients use the same core flow and can exchange a successful authorization code with your backend for an application session.

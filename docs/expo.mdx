@@ -1,0 +1,79 @@
+---
+title: Expo
+description: Native and fallback WeChat authentication for Expo applications.
+---
+
+# Expo
+
+`@chinafast/expo-wechat-auth` selects a native, web, or Official Account flow and handles linking, local state, callback parsing, and backend exchange.
+
+## Configure the client
+
+```ts
+import * as Linking from "expo-linking";
+import { WeChatAuth } from "@chinafast/expo-wechat-auth";
+
+WeChatAuth.configure({
+  exchangeUrl: "https://api.example.com/auth/wechat",
+  native: {
+    appId: process.env.EXPO_PUBLIC_WECHAT_OPEN_APP_ID!,
+    redirectUri: Linking.createURL("wechat-auth/callback"),
+    universalLink: "https://example.com/app/",
+  },
+  web: {
+    appId: process.env.EXPO_PUBLIC_WECHAT_WEB_APP_ID!,
+    redirectUri: Linking.createURL("wechat-auth/callback"),
+  },
+  scheme: "wechatdemo",
+});
+
+WeChatAuth.installLinkingHandler();
+```
+
+The linking handler is idempotent, handles initial callback URLs, and returns an idempotent cleanup function.
+
+## React hook
+
+```tsx
+import { useWeChatAuth } from "@chinafast/expo-wechat-auth/react";
+
+function SignInButton() {
+  const { signIn, loading, error } = useWeChatAuth();
+  return (
+    <Button
+      title={loading ? "Signing in…" : "Sign in with WeChat"}
+      disabled={loading}
+      onPress={() => void signIn({ scope: "profile" })}
+    />
+  );
+}
+```
+
+Use `authorize()` instead when you need only the raw WeChat authorization result.
+
+## Config plugin
+
+```ts
+export default {
+  expo: {
+    plugins: [
+      [
+        "@chinafast/expo-wechat-auth/plugin",
+        {
+          wechat: {
+            appId: process.env.EXPO_PUBLIC_WECHAT_OPEN_APP_ID,
+            universalLink: "https://example.com/app/",
+            androidPackageName: "cn.example.app",
+            iosBundleIdentifier: "cn.example.app",
+          },
+          scheme: "wechatdemo",
+        },
+      ],
+    ],
+  },
+};
+```
+
+::: warning Expo Go
+The native WeChat SDK requires an Expo development build or standalone app. Expo Go cannot load it.
+:::

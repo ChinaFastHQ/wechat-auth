@@ -1,0 +1,51 @@
+---
+title: Server and security
+description: Exchange codes, validate state, and integrate WeChat with Better Auth.
+---
+
+# Server and security
+
+`@chinafast/wechat-auth-server` contains server-only credential selection, authorization-code exchange, profile lookup, and one-time state validation.
+
+```ts
+import {
+  createMemoryStateStore,
+  exchangeWeChatCode,
+} from "@chinafast/wechat-auth-server";
+```
+
+## Better Auth
+
+```ts
+import { betterAuth } from "better-auth";
+import { createMemoryStateStore } from "@chinafast/wechat-auth-server";
+import { wechatPlugin } from "@chinafast/wechat-auth-server/better-auth";
+
+export const auth = betterAuth({
+  database,
+  plugins: [
+    wechatPlugin({
+      credentials: {
+        openPlatform: {
+          appId: process.env.WECHAT_APP_ID!,
+          secret: process.env.WECHAT_APP_SECRET!,
+        },
+      },
+      stateStore: createMemoryStateStore(),
+    }),
+  ],
+});
+```
+
+The in-memory state store is appropriate for development and a single server process. Production deployments with multiple instances need a shared `WeChatStateStore`, such as Redis, whose consume operation is atomic.
+
+## Security checklist
+
+- Never expose a WeChat `AppSecret` to browser or native code.
+- Generate unpredictable one-time state on the server and expire it promptly.
+- Atomically consume state before exchanging an authorization code.
+- Allow-list redirect URIs rather than accepting an arbitrary client value.
+- Establish your own session only after a successful server-side exchange.
+- Store provider access and refresh tokens as server-side secrets.
+
+Local state validation in the client is defense in depth. The backend remains authoritative.

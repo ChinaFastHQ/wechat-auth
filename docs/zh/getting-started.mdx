@@ -1,0 +1,39 @@
+---
+title: 快速开始
+description: 安装微信登录并理解完整授权流程。
+---
+
+# 快速开始
+
+## 按运行环境安装
+
+::: code-group
+```bash [Web]
+pnpm add @chinafast/web-wechat-auth
+```
+```bash [Expo]
+pnpm add @chinafast/expo-wechat-auth
+```
+```bash [服务端]
+pnpm add @chinafast/wechat-auth-server
+```
+:::
+
+## 身份验证流程
+
+1. 客户端向后端请求一次性 state。
+2. 软件包选择原生、普通网页或公众号授权流程。
+3. 微信返回授权 code 和原始 state。
+4. 客户端验证本地待处理 state，并将回调数据发送到后端。
+5. 后端原子消费自己的 state、交换 code，并创建应用会话。
+
+客户端 state 只能关联发起授权的浏览器或应用，不能替代服务端 state 验证。
+
+## 所需微信配置
+
+- Expo 原生登录需要开放平台移动应用凭据。
+- 普通浏览器授权需要网站应用凭据。
+- 微信内授权需要公众号凭据。
+- 根据平台配置回调地址、Universal Link、URL Scheme 和应用标识。
+
+所有 `AppSecret` 必须保存在服务端环境变量中。客户端只应接收 App ID 和回调地址。

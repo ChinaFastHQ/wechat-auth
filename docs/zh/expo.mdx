@@ -1,0 +1,58 @@
+---
+title: Expo
+description: 面向 Expo 应用的原生与回退微信登录流程。
+---
+
+# Expo
+
+`@chinafast/expo-wechat-auth` 会选择原生、网页或公众号流程，并处理 Linking、本地 state、回调解析和后端交换。
+
+## 配置客户端
+
+```ts
+import * as Linking from "expo-linking";
+import { WeChatAuth } from "@chinafast/expo-wechat-auth";
+
+WeChatAuth.configure({
+  exchangeUrl: "https://api.example.com/auth/wechat",
+  native: {
+    appId: process.env.EXPO_PUBLIC_WECHAT_OPEN_APP_ID!,
+    redirectUri: Linking.createURL("wechat-auth/callback"),
+    universalLink: "https://example.com/app/",
+  },
+  scheme: "wechatdemo",
+});
+
+WeChatAuth.installLinkingHandler();
+```
+
+Linking 处理器可以重复安全地安装，会处理初始回调 URL，并返回可重复调用的清理函数。
+
+## React Hook
+
+```tsx
+import { useWeChatAuth } from "@chinafast/expo-wechat-auth/react";
+
+const { signIn, loading, error } = useWeChatAuth();
+await signIn({ scope: "profile" });
+```
+
+仅需要微信原始授权结果时可使用 `authorize()`。
+
+## 配置插件
+
+```ts
+plugins: [["@chinafast/expo-wechat-auth/plugin", {
+  wechat: {
+    appId: process.env.EXPO_PUBLIC_WECHAT_OPEN_APP_ID,
+    universalLink: "https://example.com/app/",
+    androidPackageName: "cn.example.app",
+    iosBundleIdentifier: "cn.example.app",
+  },
+  scheme: "wechatdemo",
+}]];
+```
+
+::: warning Expo Go
+微信原生 SDK 需要 Expo 开发构建或独立应用，Expo Go 无法加载它。
+:::

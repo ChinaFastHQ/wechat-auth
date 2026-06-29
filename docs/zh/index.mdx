@@ -1,0 +1,27 @@
+---
+title: 微信登录
+description: 一套适用于浏览器、Expo、Node.js 和 Better Auth 的身份验证引擎。
+---
+
+# 微信登录
+
+一套可移植的身份验证引擎，并针对浏览器、Expo 和可信服务端提供独立的软件包。
+
+::: tip 按运行环境隔离
+客户端配置只接受 App ID 和回调地址。微信 AppSecret 只能存在于 `@chinafast/wechat-auth-server` 中。
+:::
+
+## 软件包
+
+| 软件包 | 职责 |
+| --- | --- |
+| `@chinafast/wechat-auth-core` | 与框架无关的策略、URL 构建、state 验证和流程编排 |
+| `@chinafast/web-wechat-auth` | 浏览器客户端，以及 React 和 Better Auth 客户端入口 |
+| `@chinafast/expo-wechat-auth` | Expo/React Native 环境、Linking、存储、配置插件和原生 SDK 适配 |
+| `@chinafast/wechat-auth-server` | 凭据、code 交换、用户资料、服务端 state 和 Better Auth 服务端集成 |
+
+## 从哪里开始
+
+- 浏览器或 SSR 应用请阅读 [Web 指南](/zh/wechat-auth/web)。
+- 原生应用和开发构建请阅读 [Expo 指南](/zh/wechat-auth/expo)。
+- 可信后端请阅读 [服务端与安全](/zh/wechat-auth/server)。

@@ -1,0 +1,44 @@
+---
+title: Web
+description: 面向浏览器和 React 应用的微信登录。
+---
+
+# Web
+
+`@chinafast/web-wechat-auth` 支持网站应用授权、微信内公众号授权、SSR 安全导入和可选的 React 绑定。
+
+## 创建客户端
+
+```ts
+import { createWeChatAuth } from "@chinafast/web-wechat-auth";
+
+const config = await fetch("/auth/wechat/config").then((response) => response.json());
+const wechat = createWeChatAuth({
+  web: { appId: config.webAppId, redirectUri: config.redirectUri },
+  officialAccount: {
+    appId: config.officialAccountAppId,
+    redirectUri: config.redirectUri,
+  },
+});
+
+await wechat.signIn();
+```
+
+根入口在 SSR 期间不会读取浏览器全局变量。
+
+## React
+
+```tsx
+import { WeChatAuthProvider, useWeChatAuth } from "@chinafast/web-wechat-auth/react";
+
+function SignInButton() {
+  const { signIn, loading } = useWeChatAuth();
+  return <button disabled={loading} onClick={() => void signIn()}>微信登录</button>;
+}
+```
+
+浏览器默认使用 `sessionStorage` 保存待处理授权。传入 `{ storage: "local" }` 可改用 `localStorage`，也可以注入自定义 `PendingAuthStorage`。
+
+::: warning
+浏览器中的 state 只负责本地回调关联。交换 code 前，服务端必须独立创建并原子消费一次性 state。
+:::

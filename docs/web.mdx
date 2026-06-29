@@ -1,0 +1,65 @@
+---
+title: Web
+description: WeChat authentication for vanilla browser and React applications.
+---
+
+# Web
+
+`@chinafast/web-wechat-auth` supports ordinary website authorization, Official Account authorization inside WeChat, SSR-safe imports, and optional React bindings.
+
+## Create a client
+
+Fetch public configuration from your backend, then create one shared client:
+
+```ts
+import { createWeChatAuth } from "@chinafast/web-wechat-auth";
+
+const config = await fetch("/auth/wechat/config").then((response) => response.json());
+const wechat = createWeChatAuth({
+  web: { appId: config.webAppId, redirectUri: config.redirectUri },
+  officialAccount: {
+    appId: config.officialAccountAppId,
+    redirectUri: config.redirectUri,
+  },
+});
+
+await wechat.signIn();
+```
+
+The root entry can be imported during SSR without reading browser globals.
+
+## React
+
+```tsx
+import {
+  WeChatAuthProvider,
+  useWeChatAuth,
+} from "@chinafast/web-wechat-auth/react";
+
+function SignInButton() {
+  const { signIn, loading } = useWeChatAuth();
+  return (
+    <button disabled={loading} onClick={() => void signIn()}>
+      Sign in with WeChat
+    </button>
+  );
+}
+
+export function App() {
+  return (
+    <WeChatAuthProvider client={wechat}>
+      <SignInButton />
+    </WeChatAuthProvider>
+  );
+}
+```
+
+## Pending state storage
+
+The browser uses `sessionStorage` by default. Pass `{ storage: "local" }` for `localStorage`, or inject a `PendingAuthStorage` implementation.
+
+::: warning
+Browser pending state only correlates the callback locally. The server must independently create and atomically consume one-time state before it exchanges a code.
+:::
+
+For Better Auth, import the client integration from `@chinafast/web-wechat-auth/better-auth/client` and pair it with the server plugin.
